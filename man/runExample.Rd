@@ -6,13 +6,14 @@
 \usage{
 runExample(
   example = c("basic-signin", "basic-signin-mongodb", "basic-signin-theme",
-    "basic-signup", "test-app")
+    "basic-signup", "signup-pw-reset", "test-app")
 )
 }
 \arguments{
 \item{example}{The app to launch. Options are
 "basic-signin", "basic-signin-mongodb", "basic-signin-theme",
-"basic-signup", "test-app"}
+"basic-signup", "signup-pw-reset",
+"test-app"}
 }
 \value{
 No return value, a shiny app is launched.
@@ -27,5 +28,8 @@ if (interactive()) {
   runExample("basic-signin")
   runExample("basic-signin-mongodb")
   runExample("basic-signin-theme")
+  runExample("basic-signup")
+  runExample("signup-pw-reset")
+  runExample("test-app")
 }
 }

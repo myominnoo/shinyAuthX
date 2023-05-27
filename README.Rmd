@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/shinyAuthX)](https://CRAN.R-project.org/package=shinyAuthX)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 ## Simplify User Authentication in Shiny Apps with `ShinyAuthX`
@@ -68,7 +68,12 @@ You can use the following `user`/`password` pairs:
 See `?create_dummy_users` for dummy user credentials that are used in these examples.  
 
 ``` r
-## to add later
+  runExample("basic-signin")
+  runExample("basic-signin-mongodb")
+  runExample("basic-signin-theme")
+  runExample("basic-signup")
+  runExample("signup-pw-reset")
+  runExample("test-app")
 ```
 
 ## Usage
@@ -81,12 +86,58 @@ The package provides four module functions with corresponding UI and server elem
 - password recovery: `forgotpwUI`, `forgotpwServer`
 
 
+Below is a minimal reproducible example of how to use the `sign-in` authentication modules in a shiny app. 
 
 
+```
 
-```{r example}
+library(shiny)
 library(shinyAuthX)
-## basic example code
+
+# dataframe that holds usernames, passwords and other user data
+users_base <- create_dummy_users()
+
+ui <- fluidPage(
+	# add signout button UI
+	div(class = "pull-right", signoutUI(id = "signout")),
+
+  # add signin panel UI function without signup or password recovery panel
+  signinUI(id = "signin", .add_forgotpw = FALSE, .add_btn_signup = FALSE),
+
+  # setup output to show user info after signin
+  verbatimTextOutput("user_data")
+)
+
+server <- function(input, output, session) {
+	# Export reactive values for testing
+	exportTestValues(
+		auth_status = credentials()$user_auth,
+		auth_info   = credentials()$info
+	)
+
+	# call the signout module with reactive trigger to hide/show
+	signout_init <- signoutServer(
+		id = "signout",
+		active = reactive(credentials()$user_auth)
+	)
+
+  # call signin module supplying data frame,
+  credentials <- signinServer(
+    id = "signin",
+    users_db = users_base,
+    sodium_hashed = TRUE,
+    reload_on_signout = FALSE,
+    signout = reactive(signout_init())
+  )
+
+  output$user_data <- renderPrint({
+    # use req to only render results when credentials()$user_auth is TRUE
+    req(credentials()$user_auth)
+    str(credentials())
+  })
+}
+
+shinyApp(ui = ui, server = server)
 ```
 
 
@@ -100,8 +151,7 @@ library(shinyAuthX)
 	3. user signin with mongolite
 	4. user signup with mongolite 
 	5. user signup with mongolite plus email option [just codes; not run]
-	
-	
+
 
 ## Credits: 
 
@@ -122,3 +172,7 @@ For further information about their specific roles and contributions, we recomme
 It is important to note that the security of any authentication system is a complex matter, and while we have taken great care in developing `shinyAuthX`, we cannot guarantee its foolproof security. The authentication process provided by `shinyAuthX` should be used with caution, and we strongly recommend implementing additional security measures based on your specific requirements. We endorse Paul Campbell's disclaimer statement regarding the security risks associated with the package. Please use `shinyAuthX` at your own risk.
 
 We are grateful for the contributions and support from all the individuals mentioned above, as well as the wider community that has provided feedback and suggestions to help improve `shinyAuthX`. Thank you for your valuable contributions and continued support!
+
+## Related work
+
+Both package [`shinyauthr`](https://github.com/PaulC91/shinyauthr) and [shinymanager](https://github.com/datastorm-open/shinymanager/) provide a nice shiny module to add an authentication layer to your shiny apps.

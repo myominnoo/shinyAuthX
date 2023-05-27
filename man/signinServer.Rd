@@ -17,7 +17,7 @@ signinServer(
 )
 }
 \arguments{
-\item{id}{An ID character that corresponds with that of the server module.}
+\item{id}{The ID for the server module.}
 
 \item{users_db}{data.frame or tibble containing five columns: \code{date_created},
 \code{username}, \code{password}, \code{name}, \code{email}, and \code{permissions}.

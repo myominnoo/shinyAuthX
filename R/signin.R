@@ -4,8 +4,8 @@
 #'
 #' Shiny UI module to be used with \link{signinServer}.
 #'
-#' @param id An ID character that corresponds with that of the server module.
-#' @param ... additional shiny UIs.
+#' @param id The ID for the UI module.
+#' @param ... Additional arguments to be passed to the shiny::wellPanel function.
 #' @param .header header for the sign-in panel, defaults to `NULL`.
 #' @param .add_forgotpw logical to add password recovery feature, defaults to `TRUE`.
 #' @param .add_btn_signup logical to add sign-up feature, defaults to `FALSE`.
@@ -92,7 +92,7 @@ signinUI <- function(id,
 #' Shiny authentication module to be used with \link{signinUI}. It uses
 #' shiny's new \link[shiny]{moduleServer} method.
 #'
-#' @param id An ID character that corresponds with that of the server module.
+#' @param id The ID for the server module.
 #' @param users_db data.frame or tibble containing five columns: `date_created`,
 #' `username`, `password`, `name`, `email`, and `permissions`.
 #' See \link{create_dummy_users}.

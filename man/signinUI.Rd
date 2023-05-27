@@ -14,9 +14,9 @@ signinUI(
 )
 }
 \arguments{
-\item{id}{An ID character that corresponds with that of the server module.}
+\item{id}{The ID for the UI module.}
 
-\item{...}{additional shiny UIs.}
+\item{...}{Additional arguments to be passed to the shiny::wellPanel function.}
 
 \item{.header}{header for the sign-in panel, defaults to \code{NULL}.}
 
