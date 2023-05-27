@@ -27,3 +27,5 @@ Imports:
     shiny (>= 1.7.4),
     shinyjs (>= 2.1.0),
     sodium (>= 1.2.1)
+Suggests: 
+    bslib (>= 0.4.2)
