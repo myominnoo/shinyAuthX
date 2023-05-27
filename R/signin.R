@@ -1,4 +1,6 @@
-#' `signin` UI module
+
+
+#' Sign-in UI module
 #'
 #' Shiny UI module to be used with \link{signinServer}.
 #'
@@ -85,14 +87,15 @@ signinUI <- function(id,
 
 
 
-#' `signin` Server module
+#' Sign-in Server module
 #'
 #' Shiny authentication module to be used with \link{signinUI}. It uses
 #' shiny's new \link[shiny]{moduleServer} method.
 #'
 #' @param id An ID character that corresponds with that of the server module.
 #' @param users_db data.frame or tibble containing five columns: `date_created`,
-#' `username`, `password`, `name`, `email`. See \link{create_dummy_users}.
+#' `username`, `password`, `name`, `email`, and `permissions`.
+#' See \link{create_dummy_users}.
 #' @param sodium_hashed have the passwords been hash encrypted using the `sodium` package? defaults to `TRUE`.
 #' @param signout [reactive] supply the returned reactive from \link{signoutServer} here to trigger a user sign-out
 #' @param reload_on_signout logical to force a session reload on logout? defaults to `FALSE`.
@@ -101,11 +104,20 @@ signinUI <- function(id,
 #' @param cookie_getter a function that returns a data.frame with at least two columns: user and session
 #' @param cookie_setter a function with two parameters: user and session.  The function must save these to a database.
 #'
-#' @return The module will return a reactive 2 element list to your main application.
-#'   First element \code{user_auth} is a boolean indicating whether there has been
-#'   a successful login or not. Second element \code{info} will be the data frame provided
-#'   to the function, filtered to the row matching the successfully logged in username.
-#'   When \code{user_auth} is FALSE \code{info} is NULL.
+#' @return The module will return a reactive six element list
+#' to your main application.
+#' 1. \code{user_auth} is a boolean indicating whether there has been
+#' a successful login or not.
+#'
+#' 2. \code{info} will be the data frame provided
+#' to the function, filtered to the row matching the successfully
+#' logged in username. When \code{user_auth} is FALSE \code{info} is NULL.
+#'
+#' 3. \code{cookie_already_checked} `TRUE` OR `FALSE`.
+#' 4. \code{users_db} to be used in sign-up and password recovery features.
+#' 5. \code{btn_signup} to be passed to sign-up module.
+#' 6. \code{btn_forgotpw} to be passed to password recovery module.
+#'
 #'
 #' @importFrom rlang :=
 #'

@@ -8,7 +8,7 @@ create_dummy_users()
 }
 \value{
 a tibble with five columns:  \code{date_created},
-\code{username}, \code{password}, \code{name}, \code{email}.
+\code{username}, \code{password}, \code{name}, \code{email}, and \code{permissions}.
 }
 \description{
 Create dummy users database in tibble format

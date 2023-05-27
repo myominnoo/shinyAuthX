@@ -52,7 +52,7 @@ success_text <- function(msg)
 #' Create dummy users database in tibble format
 #'
 #' @return a tibble with five columns:  `date_created`,
-#' `username`, `password`, `name`, `email`.
+#' `username`, `password`, `name`, `email`, and `permissions`.
 #'
 #' @examples
 #'
@@ -76,4 +76,34 @@ create_dummy_users <- function() {
 }
 
 
+
+#' Check user info during sign up
+#'
+#' @param signup_user a named character vector of `username`, `password`, `name`, `email`.
+#' @param existing_user a named list of character vectors: `username`, `email`
+#'
+#' @return a character for failure or `NULL` for success
+#' @noRd
+check_signup_userinfo <- function(signup_user, existing_user)
+{
+	## check user input info
+	if (signup_user["username"] == "" |
+			grepl("[[:space:]]", signup_user["username"])) {
+		"Invalid username!"
+	} else if (signup_user["password"] == "" |
+						 grepl("[[:space:]]", signup_user["password"])) {
+		"Invalid password!"
+	} else if (signup_user["email"] == "" |
+						 !grepl("@", signup_user["email"])) {
+		"Invalid email address!"
+	} else if (signup_user["name"] %in% c("", " ")) {
+		"Invalid name!"
+	} else if (any(signup_user["username"] == existing_user[["username"]])) {
+		"Username already taken!"
+	} else if (any(signup_user["email"] == existing_user[["email"]])) {
+		"Email already used!"
+	} else {
+		NULL
+	}
+}
 

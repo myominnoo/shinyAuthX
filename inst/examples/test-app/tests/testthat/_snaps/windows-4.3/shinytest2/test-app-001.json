@@ -1,0 +1,22 @@
+{
+  "input": {
+    "signin-btn_signin": 1,
+    "signin-password": "",
+    "signin-username": "admin",
+    "signout-btn_signout": 1
+  },
+  "output": {
+    "user_data": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    }
+  },
+  "export": {
+    "auth_info": null,
+    "auth_status": false
+  }
+}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/signin.R
 \name{signinUI}
 \alias{signinUI}
-\title{\code{signin} UI module}
+\title{Sign-in UI module}
 \usage{
 signinUI(
   id,

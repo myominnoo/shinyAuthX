@@ -2,7 +2,7 @@
 % Please edit documentation in R/signout.R
 \name{signoutServer}
 \alias{signoutServer}
-\title{\code{signout} Server module}
+\title{Sign-out Server module}
 \usage{
 signoutServer(id, active, ...)
 }

@@ -58,7 +58,14 @@ devtools::install_github("myominnoo/shinyAuthX")
 
 ## Run example apps
 
-Code for example apps in various contexts can be found in [inst/examples](inst/examples). You can launch these example apps with the `runExample` function.
+Code for example apps in various contexts can be found in [inst/examples](inst/examples). You can launch these example apps with the `runExample` function. 
+
+You can use the following `user`/`password` pairs: 
+- `admin`/`admin`
+- `user1`/`pass1`
+- `user2`/`pass2`
+
+See `?create_dummy_users` for dummy user credentials that are used in these examples.  
 
 ``` r
 ## to add later

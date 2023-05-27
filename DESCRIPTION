@@ -20,14 +20,18 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
+    blastula (>= 0.3.3),
     dplyr (>= 1.1.2),
+    emojifont (>= 0.5.5),
     glue (>= 1.6.2),
     lifecycle,
     rlang (>= 1.1.1),
     shiny (>= 1.7.4),
     shinyjs (>= 2.1.0),
-    sodium (>= 1.2.1)
+    sodium (>= 1.2.1),
+    stringi
 Suggests: 
+    mongolite (>= 2.7.2),
     bslib (>= 0.4.2),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
