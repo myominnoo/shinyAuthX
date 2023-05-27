@@ -2,6 +2,11 @@
 .Rhistory
 .RData
 .Ruserdata
-*.Rproj
-inst/shiny-examples/shinyauthr_example/rsconnect/
+*\.Rproj
+*\.sqlite
 inst/doc
+doc
+Meta
+examples/demo/rsconnect
+docs
+inst/demo_app/rsconnect
