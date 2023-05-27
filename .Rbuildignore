@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+<<<<<<< HEAD
+=======
+^LICENSE\.md$
+^README\.Rmd$
+>>>>>>> 1c18f89590c9cff78ae091eb0ddb1322b5585888
