@@ -1,0 +1,17 @@
+Package: shinyAuthX
+Type: Package
+Title: User Authentication Management for Shiny Apps
+Version: 0.1.0
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: Shiny modules that simplify user authentication 
+    mechanism for single shiny apps, offering a full suite of 
+    sign-in, sign-up, sign-out, and password recovery features and
+    modern UI designs that are compatible with `bslib` bootstrap themes. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    lifecycle
