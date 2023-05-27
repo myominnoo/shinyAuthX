@@ -1,4 +1,6 @@
 
+
+
 library(shiny)
 library(mongolite)
 library(shinyAuthX)
@@ -16,14 +18,24 @@ create_dummy_users() |>
 con$count()
 
 
+# create email template with outlook credential
+template <- email_template(
+	creds_file = blastula::creds_file("../outlook_creds"), ## to delete this later
+	# creds_file = blastula::creds_file("path/outlook_creds"),
+	from = "budgetbuddy4myo@outlook.com"
+	# from = "admin@email.com",
+)
+
 
 
 ui <- fluidPage(
 	# add signout button UI
 	div(class = "pull-right", signoutUI(id = "signout")),
 
-	# add signin panel UI function without signup or password recovery panel
-	signinUI(id = "signin", .add_forgotpw = FALSE, .add_btn_signup = FALSE),
+	# add signin panel UI function with signup panel
+	signinUI(id = "signin", .add_forgotpw = FALSE, .add_btn_signup = TRUE),
+	# add signup panel
+	signupUI("signup"),
 
 	# setup output to show user info after signin
 	verbatimTextOutput("user_data")
@@ -51,6 +63,11 @@ server <- function(input, output, session) {
 		signout = reactive(signout_init())
 	)
 
+	# call signup module supplying credentials() reactive
+	signupServer(
+		id = "signup", credentials = credentials, mongodb = con, email = template
+	)
+
 	output$user_data <- renderPrint({
 		# use req to only render results when credentials()$user_auth is TRUE
 		req(credentials()$user_auth)
@@ -59,4 +76,3 @@ server <- function(input, output, session) {
 }
 
 if (interactive()) shinyApp(ui = ui, server = server)
-

@@ -1,22 +1,9 @@
 
 library(shiny)
-library(mongolite)
 library(shinyAuthX)
 
-## default mongodb database server for testing: works only with `mtcars`
-con <- mongo("mtcars", url = "mongodb+srv://readwrite:test@cluster0-84vdt.mongodb.net/test")
-## remove any existing rows
-con$drop()
-## check
-con$count()
-
-# add users_base to con
-create_dummy_users() |>
-	con$insert()
-con$count()
-
-
-
+# dataframe that holds usernames, passwords and other user data
+users_base <- create_dummy_users()
 
 ui <- fluidPage(
 	# add signout button UI
@@ -45,7 +32,7 @@ server <- function(input, output, session) {
 	# call signin module supplying data frame,
 	credentials <- signinServer(
 		id = "signin",
-		users_db = con$find('{}'), ## add mongodb connection instead of tibble
+		users_db = users_base,
 		sodium_hashed = TRUE,
 		reload_on_signout = FALSE,
 		signout = reactive(signout_init())
@@ -58,5 +45,4 @@ server <- function(input, output, session) {
 	})
 }
 
-if (interactive()) shinyApp(ui = ui, server = server)
-
+shinyApp(ui, server)

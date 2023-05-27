@@ -2,7 +2,7 @@
 % Please edit documentation in R/signout.R
 \name{signoutUI}
 \alias{signoutUI}
-\title{\code{signout} UI module}
+\title{Sign-out UI module}
 \usage{
 signoutUI(
   id,

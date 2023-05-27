@@ -1,4 +1,4 @@
-#' `signout` UI module
+#' Sign-out UI module
 #'
 #' Shiny UI module to be used with \link{signoutServer}.
 #'
@@ -24,7 +24,7 @@ signoutUI <- function(id, label = "Sign out", icon = NULL,
   )
 }
 
-#' `signout` Server module
+#' Sign-out Server module
 #'
 #' Shiny authentication module to be used with \link{signoutUI}. It uses
 #' shiny's new \link[shiny]{moduleServer} method.

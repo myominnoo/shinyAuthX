@@ -2,7 +2,7 @@
 % Please edit documentation in R/signin.R
 \name{signinServer}
 \alias{signinServer}
-\title{\code{signin} Server module}
+\title{Sign-in Server module}
 \usage{
 signinServer(
   id,
@@ -20,7 +20,8 @@ signinServer(
 \item{id}{An ID character that corresponds with that of the server module.}
 
 \item{users_db}{data.frame or tibble containing five columns: \code{date_created},
-\code{username}, \code{password}, \code{name}, \code{email}. See \link{create_dummy_users}.}
+\code{username}, \code{password}, \code{name}, \code{email}, and \code{permissions}.
+See \link{create_dummy_users}.}
 
 \item{sodium_hashed}{have the passwords been hash encrypted using the \code{sodium} package? defaults to \code{TRUE}.}
 
@@ -37,11 +38,19 @@ signinServer(
 \item{cookie_setter}{a function with two parameters: user and session.  The function must save these to a database.}
 }
 \value{
-The module will return a reactive 2 element list to your main application.
-First element \code{user_auth} is a boolean indicating whether there has been
-a successful login or not. Second element \code{info} will be the data frame provided
-to the function, filtered to the row matching the successfully logged in username.
-When \code{user_auth} is FALSE \code{info} is NULL.
+The module will return a reactive six element list
+to your main application.
+\enumerate{
+\item \code{user_auth} is a boolean indicating whether there has been
+a successful login or not.
+\item \code{info} will be the data frame provided
+to the function, filtered to the row matching the successfully
+logged in username. When \code{user_auth} is FALSE \code{info} is NULL.
+\item \code{cookie_already_checked} \code{TRUE} OR \code{FALSE}.
+\item \code{users_db} to be used in sign-up and password recovery features.
+\item \code{btn_signup} to be passed to sign-up module.
+\item \code{btn_forgotpw} to be passed to password recovery module.
+}
 }
 \description{
 Shiny authentication module to be used with \link{signinUI}. It uses
