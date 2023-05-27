@@ -89,7 +89,7 @@ The package provides four module functions with corresponding UI and server elem
 Below is a minimal reproducible example of how to use the `sign-in` authentication modules in a shiny app. 
 
 
-```
+```{r, eval=FALSE}
 
 library(shiny)
 library(shinyAuthX)
