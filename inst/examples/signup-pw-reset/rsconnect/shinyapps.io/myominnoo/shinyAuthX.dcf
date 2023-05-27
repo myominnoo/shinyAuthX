@@ -5,9 +5,9 @@ account: myominnoo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9197875
-bundleId: 7270904
+bundleId: 7270921
 url: https://myominnoo.shinyapps.io/shinyAuthX/
-when: 1685189987.61334
-lastSyncTime: 1685189987.61335
+when: 1685190613.81581
+lastSyncTime: 1685190613.81582
 asMultiple: FALSE
 asStatic: FALSE

@@ -19,6 +19,7 @@ Shiny UI module to be used with \link{forgotpwServer}.
 }
 \examples{
 
+
 library(shiny)
 library(mongolite)
 library(shinyAuthX)
