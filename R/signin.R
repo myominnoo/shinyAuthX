@@ -92,7 +92,7 @@ signinUI <- function(id,
 #'
 #' @param id An ID character that corresponds with that of the server module.
 #' @param users_db data.frame or tibble containing five columns: `date_created`,
-#' `username`, `password`, `name`, `email`.
+#' `username`, `password`, `name`, `email`. See \link{create_dummy_users}.
 #' @param sodium_hashed have the passwords been hash encrypted using the `sodium` package? defaults to `TRUE`.
 #' @param signout [reactive] supply the returned reactive from \link{signoutServer} here to trigger a user sign-out
 #' @param reload_on_signout logical to force a session reload on logout? defaults to `FALSE`.

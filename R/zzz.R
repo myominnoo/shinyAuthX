@@ -2,7 +2,8 @@
 #' Toggle ui element and fade it away
 #' @param id An id character that corresponds to UI's id
 #'
-#' @export
+#' @return no return.
+#' @noRd
 show_ui_toggle <- function(id)
 {
 	# if not valid temporarily show error message to user
@@ -15,7 +16,8 @@ show_ui_toggle <- function(id)
 #'
 #' @param msg message
 #'
-#' @export
+#' @return Shiny UI div
+#' @noRd
 notify_text <- function(msg)
 {
 	shiny::div(
@@ -32,7 +34,8 @@ notify_text <- function(msg)
 #'
 #' @param msg message
 #'
-#' @export
+#' @return Shiny UI div
+#' @noRd
 success_text <- function(msg)
 {
 	shiny::div(
@@ -41,6 +44,32 @@ success_text <- function(msg)
 			style = "color: green; font-weight: bold; padding-top: 5px;",
 			class = "text-center"
 		)
+	)
+}
+
+
+
+#' Create dummy users database in tibble format
+#'
+#' @return a tibble with five columns:  `date_created`,
+#' `username`, `password`, `name`, `email`.
+#'
+#' @examples
+#'
+#' users_base <- create_dummy_users()
+#' str(users_base)
+#'
+#' @export
+create_dummy_users <- function() {
+	dplyr::tibble(
+		date_created = Sys.time(),
+		username = c("admin", "user1", "user2"),
+		password = sapply(
+			c("admin", "pass1", "pass2"),
+			sodium::password_store
+		),
+		name = c("Admin", "User One", "User Two"),
+		email = c("admin@email.com", "user1@email.com", "user2@email.com")
 	)
 }
 
