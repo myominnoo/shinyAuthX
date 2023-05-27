@@ -34,5 +34,6 @@ Imports:
 Suggests: 
     mongolite,
     bslib,
-    testthat
+    testthat,
+    covr
 Config/testthat/edition: 3
