@@ -9,6 +9,9 @@
 status](https://www.r-pkg.org/badges/version/shinyAuthX)](https://CRAN.R-project.org/package=shinyAuthX)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-CMD-check](https://github.com/myominnoo/shinyAuthX/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/myominnoo/shinyAuthX/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/myominnoo/shinyAuthX/branch/main/graph/badge.svg)](https://app.codecov.io/gh/myominnoo/shinyAuthX?branch=main)
 <!-- badges: end -->
 
 ## Simplify User Authentication in Shiny Apps with `ShinyAuthX`
