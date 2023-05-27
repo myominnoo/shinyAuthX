@@ -10,6 +10,13 @@
 
 Shiny modules that simplify user authentication mechanisms for single shiny apps, offering a full suite of sign-in, sign-up, sign-out, and password recovery features with modern UI designs that are compatible with `bslib` bootstrap themes.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/myominnoo/shinyAuthX}
+}
+
+}
 \author{
 \strong{Maintainer}: Myo Minn Oo \email{dr.myominnoo@gmail.com} (\href{https://orcid.org/0000-0003-4089-016X}{ORCID})
 
