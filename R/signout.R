@@ -2,7 +2,7 @@
 #'
 #' Shiny UI module to be used with \link{signoutServer}.
 #'
-#' @param id An ID character that corresponds with that of the server module.
+#' @param id The ID for the UI module.
 #' @param label button label
 #' @param icon button icon
 #' @param class bootstrap class for the button
@@ -29,7 +29,7 @@ signoutUI <- function(id, label = "Sign out", icon = NULL,
 #' Shiny authentication module to be used with \link{signoutUI}. It uses
 #' shiny's new \link[shiny]{moduleServer} method.
 #'
-#' @param id An ID character that corresponds with that of the server module.
+#' @param id The ID for the Server module.
 #' @param active \code{reactive} supply the returned \code{user_auth} boolean reactive from \link{signinServer}
 #'   here to hide/show the logout button
 #' @param ... arguments passed to \link[shinyjs]{toggle}

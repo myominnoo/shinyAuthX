@@ -4,8 +4,8 @@
 #'
 #' Shiny UI module to be used with \link{signupServer}.
 #'
-#' @param id An ID character that corresponds with that of the server module.
-#' @param ... additional shiny UIs.
+#' @param id The ID for the UI module.
+#' @param ... Additional arguments to be passed to the shiny::wellPanel function.
 #' @param .header header for the sign-in panel, defaults to `NULL`.
 #'
 #' @return Shiny UI sign-up panel with text inputs for `username` and `password`,
@@ -88,11 +88,13 @@ signupUI <- function(id, ..., .header = NULL) {
 #' Shiny authentication module to be used with \link{signupUI}. It uses
 #' shiny's new \link[shiny]{moduleServer} method.
 #'
-#' @param id An ID character that corresponds with that of the server module.
+#' @param id The ID for the Server module.
 #' @param credentials [reactive] supply the returned reactive from \link{signinServer}
 #' here to pass users and `btn_signup` and `btn_forgotpw` infos.
 #' @param mongodb A mongodb connection object from [mongolite::mongo].
-#' @param email A email template.
+#' Set to `NULL`: use local storage.
+#' @param email A email template. Set to `NULL`: skip code verify step.
+#' See [email_template] and [create_email].
 #'
 #' @return a data.frame with six columns, containing newly signed-up user.
 #'
@@ -194,7 +196,6 @@ signupServer <- function(id, credentials, mongodb = NULL, email = NULL) {
 					)
 
 					if (is.null(mongodb)) {
-
 						mongodb_write <- NULL
 					} else {
 						## need to supply a mongodb connection object

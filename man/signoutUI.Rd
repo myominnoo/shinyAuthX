@@ -13,7 +13,7 @@ signoutUI(
 )
 }
 \arguments{
-\item{id}{An ID character that corresponds with that of the server module.}
+\item{id}{The ID for the UI module.}
 
 \item{label}{button label}
 

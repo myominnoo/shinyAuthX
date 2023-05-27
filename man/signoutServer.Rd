@@ -7,7 +7,7 @@
 signoutServer(id, active, ...)
 }
 \arguments{
-\item{id}{An ID character that corresponds with that of the server module.}
+\item{id}{The ID for the Server module.}
 
 \item{active}{\code{reactive} supply the returned \code{user_auth} boolean reactive from \link{signinServer}
 here to hide/show the logout button}

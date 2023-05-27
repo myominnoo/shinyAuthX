@@ -5,7 +5,8 @@
 #'
 #' @param example The app to launch. Options are
 #' "basic-signin", "basic-signin-mongodb", "basic-signin-theme",
-#' "basic-signup", "test-app"
+#' "basic-signup", "signup-pw-reset",
+#' "test-app"
 #' @return No return value, a shiny app is launched.
 #' @examples
 #' ## Only run this example in interactive R sessions
@@ -13,16 +14,19 @@
 #'   runExample("basic-signin")
 #'   runExample("basic-signin-mongodb")
 #'   runExample("basic-signin-theme")
+#'   runExample("basic-signup")
+#'   runExample("signup-pw-reset")
+#'   runExample("test-app")
 #' }
 #' @export
 runExample <- function(example = c(
 	"basic-signin", "basic-signin-mongodb", "basic-signin-theme",
-	"basic-signup", "test-app"
+	"basic-signup", "signup-pw-reset", "test-app"
 ))
 {
 	example <- match.arg(example, c(
 		"basic-signin", "basic-signin-mongodb", "basic-signin-theme",
-		"basic-signup", "test-app"
+		"basic-signup", "signup-pw-reset", "test-app"
 	), several.ok = FALSE)
 	appDir <- system.file("examples", example, package = "shinyAuthX")
 	if (appDir == "") {
