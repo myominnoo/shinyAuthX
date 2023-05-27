@@ -7,5 +7,5 @@
 inst/doc
 doc
 Meta
-examples/signup-pw-reset/rsconnect
-examples/signup-pw-reset/rsconnect/*
+examples/demo/rsconnect
+examples/demo/rsconnect/*
