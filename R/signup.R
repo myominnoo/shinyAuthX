@@ -91,7 +91,7 @@ signupUI <- function(id, ..., .header = NULL) {
 #' @param id An ID character that corresponds with that of the server module.
 #' @param credentials [reactive] supply the returned reactive from \link{signinServer}
 #' here to pass users and `btn_signup` and `btn_forgotpw` infos.
-#' @param mongodb A mongodb connection object from [mongo].
+#' @param mongodb A mongodb connection object from [mongolite::mongo].
 #' @param email A email template.
 #'
 #' @return a data.frame with six columns, containing newly signed-up user.

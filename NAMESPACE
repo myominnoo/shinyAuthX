@@ -3,6 +3,7 @@
 export(create_dummy_users)
 export(create_email)
 export(email_template)
+export(runExample)
 export(signinServer)
 export(signinUI)
 export(signoutServer)

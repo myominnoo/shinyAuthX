@@ -32,6 +32,7 @@ Imports:
     sodium (>= 1.2.1),
     stringi
 Suggests: 
+    mongolite (>= 2.7.2),
     bslib (>= 0.4.2),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

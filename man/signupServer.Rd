@@ -12,7 +12,7 @@ signupServer(id, credentials, mongodb = NULL, email = NULL)
 \item{credentials}{\link{reactive} supply the returned reactive from \link{signinServer}
 here to pass users and \code{btn_signup} and \code{btn_forgotpw} infos.}
 
-\item{mongodb}{A mongodb connection object from \link{mongo}.}
+\item{mongodb}{A mongodb connection object from \link[mongolite:mongo]{mongolite::mongo}.}
 
 \item{email}{A email template.}
 }
