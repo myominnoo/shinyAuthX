@@ -66,10 +66,12 @@ create_dummy_users <- function() {
 		username = c("admin", "user1", "user2"),
 		password = sapply(
 			c("admin", "pass1", "pass2"),
-			sodium::password_store
+			sodium::password_store,
+			USE.NAMES = FALSE
 		),
 		name = c("Admin", "User One", "User Two"),
-		email = c("admin@email.com", "user1@email.com", "user2@email.com")
+		email = c("admin@email.com", "user1@email.com", "user2@email.com"),
+		permissions = c("admin", "standard", "standard")
 	)
 }
 

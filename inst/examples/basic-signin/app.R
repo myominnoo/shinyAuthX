@@ -1,5 +1,6 @@
 
 library(shiny)
+library(shinyAuthX)
 
 # dataframe that holds usernames, passwords and other user data
 users_base <- create_dummy_users()

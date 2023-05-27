@@ -28,4 +28,6 @@ Imports:
     shinyjs (>= 2.1.0),
     sodium (>= 1.2.1)
 Suggests: 
-    bslib (>= 0.4.2)
+    bslib (>= 0.4.2),
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
