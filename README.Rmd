@@ -85,8 +85,9 @@ The package provides four module functions with corresponding UI and server elem
 - sign-up: `signupUI`, `signupServer`
 - password recovery: `forgotpwUI`, `forgotpwServer`
 
+### Basic sign-in and sign-out authentications 
 
-Below is a minimal reproducible example of how to use the `sign-in` authentication modules in a shiny app. 
+Below is a minimal reproducible example of how to use basic authentications in a shiny app. The code sets up a Shiny app with user authentication, allowing users to sign in, sign out, and view their user data. 
 
 
 ```{r, eval=FALSE}
@@ -138,6 +139,158 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui = ui, server = server)
+```
+
+
+### Using mongodb via `mongolite`
+
+The following code demonstrates how to integrate user authentication and authorization features into a Shiny application using `shinyAuthX` and a `MongoDB` database. It establishes a connection to `MongoDB`, initializes the database with dummy user data, defines the application's UI, implements the server logic for sign-in and sign-out functionality, and renders user information based on authentication status. The code serves as a foundation for building secure and authenticated Shiny applications with `MongoDB` as the user data storage backend.
+
+```{r, eval=FALSE}
+
+library(shiny)
+library(mongolite)
+library(shinyAuthX)
+
+## default mongodb database server for testing: works only with `mtcars`
+con <- mongo("mtcars", url = "mongodb+srv://readwrite:test@cluster0-84vdt.mongodb.net/test")
+## remove any existing rows
+con$drop()
+## check
+con$count()
+
+# add users_base to con
+create_dummy_users() |>
+	con$insert()
+con$count()
+
+
+
+ui <- fluidPage(
+	# add signout button UI
+	div(class = "pull-right", signoutUI(id = "signout")),
+
+	# add signin panel UI function without signup or password recovery panel
+	signinUI(id = "signin", .add_forgotpw = FALSE, .add_btn_signup = FALSE),
+
+	# setup output to show user info after signin
+	verbatimTextOutput("user_data")
+)
+
+server <- function(input, output, session) {
+	# Export reactive values for testing
+	exportTestValues(
+		auth_status = credentials()$user_auth,
+		auth_info   = credentials()$info
+	)
+
+	# call the signout module with reactive trigger to hide/show
+	signout_init <- signoutServer(
+		id = "signout",
+		active = reactive(credentials()$user_auth)
+	)
+
+	# call signin module supplying data frame,
+	credentials <- signinServer(
+		id = "signin",
+		users_db = con$find('{}'), ## add mongodb connection instead of tibble
+		sodium_hashed = TRUE,
+		reload_on_signout = FALSE,
+		signout = reactive(signout_init())
+	)
+
+	output$user_data <- renderPrint({
+		# use req to only render results when credentials()$user_auth is TRUE
+		req(credentials()$user_auth)
+		str(credentials())
+	})
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+
+
+### Extended Sign-up and Password-reset modules 
+
+The extended code below demonstrates the integration of sign-up and password-reset features into a Shiny application with user authentication and authorization. It leverages the `shinyAuthX` package and a `MongoDB` database to store and manage user data. The application allows users to sign up, sign in, reset their passwords, and view user information upon authentication. The code serves as a foundation for developing more comprehensive and secure web applications with user management capabilities.
+
+```{r, eval=FALSE}
+
+library(shiny)
+library(mongolite)
+library(shinyAuthX)
+
+## default mongodb database server for testing: works only with `mtcars`
+con <- mongo("mtcars", url = "mongodb+srv://readwrite:test@cluster0-84vdt.mongodb.net/test")
+## remove any existing rows
+con$drop()
+## check
+con$count()
+
+# add users_base to con
+create_dummy_users() |>
+	con$insert()
+con$count()
+
+
+
+
+ui <- fluidPage(
+	# add signout button UI
+	div(class = "pull-right", signoutUI(id = "signout")),
+
+	# add signin panel UI function with signup panel
+	signinUI(id = "signin", .add_forgotpw = TRUE, .add_btn_signup = TRUE),
+	# add signup panel
+	signupUI("signup"),
+	# add password-reset panel
+	forgotpwUI("pw-reset"),
+
+	# setup output to show user info after signin
+	verbatimTextOutput("user_data")
+)
+
+server <- function(input, output, session) {
+	# Export reactive values for testing
+	exportTestValues(
+		auth_status = credentials()$user_auth,
+		auth_info   = credentials()$info
+	)
+
+	# call the signout module with reactive trigger to hide/show
+	signout_init <- signoutServer(
+		id = "signout",
+		active = reactive(credentials()$user_auth)
+	)
+
+	# call signin module supplying data frame,
+	credentials <- signinServer(
+		id = "signin",
+		users_db = con$find('{}'), ## add mongodb connection instead of tibble
+		sodium_hashed = TRUE,
+		reload_on_signout = FALSE,
+		signout = reactive(signout_init())
+	)
+
+	# call signup module supplying credentials() reactive and mongodb
+	signupServer(
+		id = "signup", credentials = credentials, mongodb = con
+	)
+	# call password-reset module supplying credentials() reactive and mongodb
+	forgotpwServer(
+		id = "pw-reset", credentials = credentials, mongodb = con
+	)
+
+	output$user_data <- renderPrint({
+		# use req to only render results when credentials()$user_auth is TRUE
+		req(credentials()$user_auth)
+		str(credentials())
+	})
+}
+
+shinyApp(ui = ui, server = server)
+
 ```
 
 

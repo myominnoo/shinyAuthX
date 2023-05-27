@@ -24,6 +24,7 @@ shiny's new \link[shiny]{moduleServer} method.
 }
 \examples{
 
+
 library(shiny)
 library(mongolite)
 library(shinyAuthX)
