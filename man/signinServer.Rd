@@ -20,7 +20,7 @@ signinServer(
 \item{id}{An ID character that corresponds with that of the server module.}
 
 \item{users_db}{data.frame or tibble containing five columns: \code{date_created},
-\code{username}, \code{password}, \code{name}, \code{email}.}
+\code{username}, \code{password}, \code{name}, \code{email}. See \link{create_dummy_users}.}
 
 \item{sodium_hashed}{have the passwords been hash encrypted using the \code{sodium} package? defaults to \code{TRUE}.}
 
@@ -48,22 +48,11 @@ Shiny authentication module to be used with \link{signinUI}. It uses
 shiny's new \link[shiny]{moduleServer} method.
 }
 \examples{
-library(shiny)
-# devtools::load_all()
 
+library(shiny)
 
 # dataframe that holds usernames, passwords and other user data
-users_base <- dplyr::tibble(
-  date_created = Sys.time(),
-  username = c("admin", "user1", "user2"),
-  password = sapply(
-    c("admin", "pass1", "pass2"),
-    sodium::password_store
-  ),
-  name = c("Admin", "User One", "User Two"),
-  email = c("admin@email.com", "user1@email.com", "user2@email.com")
-)
-
+users_base <- create_dummy_users()
 
 ui <- fluidPage(
   # add signin panel UI function without signup or password recovery panel

@@ -23,22 +23,11 @@ Shiny authentication module to be used with \link{signoutUI}. It uses
 shiny's new \link[shiny]{moduleServer} method.
 }
 \examples{
-library(shiny)
-# devtools::load_all()
 
+library(shiny)
 
 # dataframe that holds usernames, passwords and other user data
-users_base <- dplyr::tibble(
-  date_created = Sys.time(),
-  username = c("admin", "user1", "user2"),
-  password = sapply(
-    c("admin", "pass1", "pass2"),
-    sodium::password_store
-  ),
-  name = c("Admin", "User One", "User Two"),
-  email = c("admin@email.com", "user1@email.com", "user2@email.com")
-)
-
+users_base <- create_dummy_users()
 
 ui <- fluidPage(
   # add signin panel UI function without signup or password recovery panel
