@@ -16,6 +16,7 @@ Description: Shiny modules that simplify user authentication
     modern UI designs that are compatible with `bslib` bootstrap themes. 
 License: MIT + file LICENSE
 URL: https://github.com/myominnoo/shinyAuthX
+BugReports: https://github.com/myominnoo/shinyAuthX/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

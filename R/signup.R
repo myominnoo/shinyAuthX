@@ -47,13 +47,13 @@ signupUI <- function(id, ..., .header = NULL) {
 			),
 			shiny::textInput(
 				ns("email"),
-				shiny::tagList(shiny::icon("envelope"), "Email",
-											 placeholder = "Enter your email"),
+				shiny::tagList(shiny::icon("envelope"), "Email"),
+				placeholder = "Enter your email",
 			),
 			shiny::textInput(
 				ns("name"),
-				shiny::tagList(shiny::icon("signature"), "Your Name",
-											 placeholder = "Enter your name"),
+				shiny::tagList(shiny::icon("signature"), "Your Name"),
+				placeholder = "Enter your name",
 			),
 
 			shiny::actionLink(ns("getcode"), "Get Verification Code"),
