@@ -14,6 +14,7 @@ Shiny modules that simplify user authentication mechanisms for single shiny apps
 Useful links:
 \itemize{
   \item \url{https://github.com/myominnoo/shinyAuthX}
+  \item Report bugs at \url{https://github.com/myominnoo/shinyAuthX/issues}
 }
 
 }

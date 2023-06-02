@@ -4,19 +4,10 @@ library(shiny)
 library(mongolite)
 library(shinyAuthX)
 
-## default mongodb database server for testing: works only with `mtcars`
-con <- mongo("mtcars", url = "mongodb+srv://readwrite:test@cluster0-84vdt.mongodb.net/test")
-## remove any existing rows
-con$drop()
-## check
-con$count()
 
-# add users_base to con
-create_dummy_users() |>
-	con$insert()
-con$count()
-
-
+# options(repos = BiocManager::repositories())
+# options("repos")
+# options(repos = c(CRAN = "https://cloud.r-project.org", CRAN = "https://cran.rstudio.com/", BiocManager::repositories()))
 
 
 ui <- fluidPage(
@@ -35,6 +26,20 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
+
+
+	## default mongodb database server for testing: works only with `mtcars`
+	con <- mongo("mtcars", url = "mongodb+srv://readwrite:test@cluster0-84vdt.mongodb.net/test")
+	## remove any existing rows
+	con$drop()
+	## check
+	con$count()
+
+	# add users_base to con
+	create_dummy_users() |>
+		con$insert()
+	con$count()
+
 	# Export reactive values for testing
 	exportTestValues(
 		auth_status = credentials()$user_auth,

@@ -1,6 +1,5 @@
 
 
-
 library(shiny)
 library(mongolite)
 library(shinyAuthX)
@@ -14,33 +13,10 @@ con$count()
 
 # add users_base to con
 create_dummy_users() |>
-	dplyr::add_row(username = "myo", email = "dr.myominnoo@gmail.com", name = "Myo Minn Oo") |>
 	con$insert()
 con$count()
 
 
-# create email template with outlook credential
-template <- email_template(
-	creds_file = blastula::creds_file("../outlook_creds"), ## to delete this later
-	# creds_file = blastula::creds_file("path/outlook_creds"),
-	from = "budgetbuddy4myo@outlook.com"
-	# from = "admin@email.com",
-)
-
-
-
-# to use with .Renviron
-# email_address <- Sys.getenv("email_address")
-# email_password <- Sys.getenv("email_password")
-#
-# outlook_creds <- sprintf('{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["version","host","port","use_ssl","user","password"]}},"value":[{"type":"integer","attributes":{},"value":[1]},{"type":"character","attributes":{},"value":["smtp-mail.outlook.com"]},{"type":"double","attributes":{},"value":[587]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["%s"]},{"type":"character","attributes":{},"value":["%s"]}]}', email_address, email_password)
-#
-#
-# # create email template with outlook credential
-# template <- email_template(
-# 	creds_file = blastula::creds_file(textConnection(outlook_creds)),
-# 	from = email_address
-# )
 
 
 ui <- fluidPage(
@@ -80,13 +56,13 @@ server <- function(input, output, session) {
 		signout = reactive(signout_init())
 	)
 
-	# call signup module supplying credentials() reactive
+	# call signup module supplying credentials() reactive and mongodb
 	signupServer(
-		id = "signup", credentials = credentials, mongodb = con, email = template
+		id = "signup", credentials = credentials, mongodb = con
 	)
 	# call password-reset module supplying credentials() reactive and mongodb
 	forgotpwServer(
-		id = "pw-reset", credentials = credentials, mongodb = con, email = template
+		id = "pw-reset", credentials = credentials, mongodb = con
 	)
 
 	output$user_data <- renderPrint({
