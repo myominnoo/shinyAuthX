@@ -13,14 +13,12 @@
 #' @example inst/examples/basic-signin/app.R
 #' @export
 signoutUI <- function(id, label = "Sign out", icon = NULL,
-                      class = "btn-danger", style = "color: white;") {
+                      class = "btn-danger", ...) {
   ns <- shiny::NS(id)
 
   shinyjs::hidden(
-    shiny::actionButton(ns("btn_signout"), label,
-      icon = icon,
-      class = class, style = style
-    )
+    shiny::actionButton(ns("btn_signout"), label, icon = icon,
+      class = class, ...)
   )
 }
 
