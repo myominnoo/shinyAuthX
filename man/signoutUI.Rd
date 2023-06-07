@@ -9,7 +9,8 @@ signoutUI(
   label = "Sign out",
   icon = NULL,
   class = "btn-danger",
-  style = "color: white;"
+  btn = TRUE,
+  ...
 )
 }
 \arguments{
@@ -21,7 +22,9 @@ signoutUI(
 
 \item{class}{bootstrap class for the button}
 
-\item{style}{css styling for the button}
+\item{btn}{logical. TRUE for \link{actionButton} and FALSE for \link{actionLink}.}
+
+\item{...}{arguments for \link{actionButton} or \link{actionLink}}
 }
 \value{
 Shiny UI action button

@@ -6,20 +6,27 @@
 #' @param label button label
 #' @param icon button icon
 #' @param class bootstrap class for the button
-#' @param style css styling for the button
+#' @param ... arguments for [actionButton] or [actionLink]
+#' @param btn logical. TRUE for [actionButton] and FALSE for [actionLink].
 #'
 #' @return Shiny UI action button
 #'
 #' @example inst/examples/basic-signin/app.R
 #' @export
 signoutUI <- function(id, label = "Sign out", icon = NULL,
-                      class = "btn-danger", ...) {
+                      class = "btn-danger", btn = TRUE, ...) {
   ns <- shiny::NS(id)
 
-  shinyjs::hidden(
-    shiny::actionButton(ns("btn_signout"), label, icon = icon,
-      class = class, ...)
-  )
+  if (btn) {
+  	shinyjs::hidden(
+  		shiny::actionButton(ns("btn_signout"), label, icon = icon,
+  												class = class, ...)
+  	)
+  } else {
+  	shinyjs::hidden(
+  		shiny::actionLink(ns("btn_signout"), label, icon = icon, ...)
+  	)
+  }
 }
 
 #' Sign-out Server module
