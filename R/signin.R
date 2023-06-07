@@ -61,15 +61,19 @@ signinUI <- function(id,
         shiny::actionButton(ns("btn_signin"), "Sign in", width = "100%", class = "btn-success")
       ),
       if (.add_forgotpw) {
-        shiny::actionLink(ns("btn_forgotpw"), "Forgot password?",
-          style = "float:right;margin:10px auto;"
+        shiny::fluidRow(
+        	shiny::column(7, shiny::hr()),
+        	shiny::column(
+        		5, shiny::actionLink(ns("btn_forgotpw"), "Forgot password?",
+        												 style = "float:right;margin:10px auto;"
+        		)
+        	)
         )
       } else {
         shiny::tagList()
       },
       if (.add_btn_signup) {
-        shiny::tagList(
-          shiny::hr(),
+        shiny::fluidRow(
           shiny::actionButton(ns("btn_signup"), "Create new account", width = "100%", class = "btn-default")
         )
       } else {
